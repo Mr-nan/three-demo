@@ -4,7 +4,7 @@
 
 <script>
     import * as Three from 'three'
-    const img = require('../static/car.jpg')
+    const img = require('../static/sun_temple_stripe.jpg')
 
     import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
     export default {
@@ -34,10 +34,8 @@
 
                 this.scene = new Three.Scene()
       
-                this.camera = new Three.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.01, 1000)
+                this.camera = new Three.PerspectiveCamera(90, window.innerWidth/window.innerHeight, 0.1, 100)
                 this.camera.position.z = 0.01
-
-        
 
                 this.controls = new OrbitControls(this.camera, this.renderer.domElement);
                 this.controls.enableZoom = false;
@@ -45,12 +43,11 @@
                 this.controls.enableDamping = true;
                 this.controls.rotateSpeed = -0.25;
 
-                const textures = this.getTexturesFromAtlasFile(img, 4);
+                const textures = this.getTexturesFromAtlasFile(img, 6);
 
                 const materials = [];
 
                 for (let i = 0; i < 6; i++) {
-
                     materials.push(new Three.MeshBasicMaterial({
                         map: textures[i]
                     }));
@@ -66,26 +63,21 @@
             getTexturesFromAtlasFile(atlasImgUrl, tilesNum) {
                 const textures = [];
                 for (let i = 0; i < tilesNum; i++) {
-
                     textures[i] = new Three.Texture();
-
                 }
 
                 new Three.ImageLoader()
                     .load(atlasImgUrl, (image) => {
 
                         let canvas, context;
-                        const tileWidth = image.width;
-                        console.log('tileWidth:',tileWidth)
-
+                        const tileWidth = image.height;
                         for (let i = 0; i < textures.length; i++) {
 
                             canvas = document.createElement('canvas');
                             context = canvas.getContext('2d');
                             canvas.height = tileWidth;
-                            canvas.width = tileWidth;
-                            context.drawImage(image, tileWidth * i, 0, tileWidth, tileWidth, 0, 0, tileWidth,
-                            tileWidth);
+							canvas.width = tileWidth;
+                            context.drawImage(image, tileWidth * i, 0, tileWidth, tileWidth, 0, 0, tileWidth,tileWidth);
                             textures[i].image = canvas;
                             textures[i].needsUpdate = true;
                         }

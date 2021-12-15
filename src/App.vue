@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <webglPanoramaCube />
+    <!-- <webglPanoramaCube /> -->
+    <webglPanoramaEquirectangular></webglPanoramaEquirectangular>
   </div>
 </template>
 
 <script>
-import webglPanoramaCube from './components/webglPanoramaCube.vue'
+// import webglPanoramaCube from './components/webglPanoramaCube.vue'
+import webglPanoramaEquirectangular from '@/components/webglPanoramaEquirectangular'
 
 export default {
   name: 'App',
   components: {
-    webglPanoramaCube
+    // webglPanoramaCube,
+    webglPanoramaEquirectangular
   }
 }
 </script>
